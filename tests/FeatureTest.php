@@ -4,9 +4,6 @@ namespace Tests;
 
 use Illuminate\Support\Facades\Event;
 
-/**
- * Class FeatureTest.
- */
 class FeatureTest extends TestCase
 {
     public function setUp(): void
