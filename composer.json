@@ -31,7 +31,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "PackageServiceProvider"
+                "\\Overtrue\\LaravelPackage\\PackageServiceProvider"
             ]
         },
         "hooks": {
