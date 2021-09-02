@@ -26,3 +26,4 @@ Homestead.json
 
 cghooks.lock
 .php_cs.cache
+.php-cs-fixer.cache
