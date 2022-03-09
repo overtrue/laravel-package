@@ -25,6 +25,5 @@ Homestead.json
 .phpunit.result.cache
 
 cghooks.lock
-.php_cs.cache
 .php-cs-fixer.cache
 composer.lock

@@ -8,15 +8,15 @@ Laravel package template.
 ## Installing
 
 ```shell
-$ composer require overtrue/laravel-package -vvv
+composer require overtrue/laravel-package -vvv
 ```
 
 ### Migrations
 
-This step is also optional, if you want to custom the pivot table, you can publish the migration files:
+You can publish the migration files to your project's `database/migrations` directory and config files to `config/` directory by running:
 
 ```php
-$ php artisan vendor:publish --provider="Overtrue\\LaravelPackage\\PackageServiceProvider" --tag=migrations
+php artisan vendor:publish
 ```
 
 ## Usage
@@ -25,9 +25,9 @@ TODO
 
 ### Events
 
-| **Event**                                       | **Description**                             |
-| ----------------------------------------------- | ------------------------------------------- |
-| `Overtrue\LaravelPackage\Events\SampleEvent`    | Sample description.                         |
+| **Event**                                    | **Description**     |
+|----------------------------------------------|---------------------|
+| `Overtrue\LaravelPackage\Events\SampleEvent` | Sample description. |
 
 ## :heart: Sponsor me 
 
