@@ -12,11 +12,11 @@ class PackageServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            \dirname(__DIR__) . '/migrations/' => database_path('migrations'),
+            \dirname(__DIR__).'/migrations/' => database_path('migrations'),
         ], 'migrations');
 
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(\dirname(__DIR__) . '/migrations/');
+            $this->loadMigrationsFrom(\dirname(__DIR__).'/migrations/');
         }
     }
 

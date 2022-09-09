@@ -1,80 +1,81 @@
 {
-    "name": "overtrue/laravel-package",
-    "description": "Laravel package template",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "overtrue",
-            "email": "anzhengchao@gmail.com"
-        }
-    ],
-    "require": {
-        "laravel/framework": "^9.4",
-        "phpstan/phpstan": "^1.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Overtrue\\LaravelPackage\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests"
-        }
-    },
-    "require-dev": {
-        "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^9.0",
-        "orchestra/testbench": "^7.1",
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "vimeo/psalm": "^4.10",
-        "jetbrains/phpstorm-attributes": "^1.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "\\Overtrue\\LaravelPackage\\PackageServiceProvider"
-            ]
-        },
-        "hooks": {
-            "pre-commit": [
-                "composer check-style",
-                "composer phpstan",
-                "composer test"
-            ],
-            "pre-push": [
-                "composer check-style"
-            ]
-        }
-    },
-    "scripts": {
-        "post-update-cmd": [
-            "cghooks remove",
-            "cghooks add --ignore-lock",
-            "cghooks update"
-        ],
-        "post-merge": "composer install",
-        "post-install-cmd": [
-            "cghooks remove",
-            "cghooks add --ignore-lock",
-            "cghooks update"
-        ],
-        "cghooks": "vendor/bin/cghooks",
-        "check-style": "php-cs-fixer fix --using-cache=no --diff --dry-run --ansi",
-        "fix-style": "php-cs-fixer fix --using-cache=no --ansi",
-        "test": "phpunit --colors",
-        "phpstan": "phpstan analyse",
-        "psalm": "psalm --show-info=true --no-cache",
-        "psalm-fix": "psalm --no-cache --alter --issues=MissingReturnType,MissingParamType"
-    },
-    "scripts-descriptions": {
-        "test": "Run all tests.",
-        "check-style": "Run style checks (only dry run - no fixing!).",
-        "fix-style": "Run style checks and fix violations."
-    },
-    "config": {
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true
-        }
+  "name": "overtrue/laravel-package",
+  "description": "Laravel package template",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "overtrue",
+      "email": "anzhengchao@gmail.com"
     }
+  ],
+  "require": {
+    "laravel/framework": "^9.4",
+    "phpstan/phpstan": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Overtrue\\LaravelPackage\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
+    }
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.2",
+    "phpunit/phpunit": "^9.0",
+    "orchestra/testbench": "^7.1",
+    "vimeo/psalm": "^4.10",
+    "jetbrains/phpstorm-attributes": "^1.0",
+    "brainmaestro/composer-git-hooks": "dev-master",
+    "laravel/pint": "^1.1"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "\\Overtrue\\LaravelPackage\\PackageServiceProvider"
+      ]
+    },
+    "hooks": {
+      "pre-commit": [
+        "composer check-style",
+        "composer phpstan",
+        "composer test"
+      ],
+      "pre-push": [
+        "composer check-style"
+      ]
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "cghooks remove",
+      "cghooks add --ignore-lock",
+      "cghooks update"
+    ],
+    "post-merge": "composer install",
+    "post-install-cmd": [
+      "cghooks remove",
+      "cghooks add --ignore-lock",
+      "cghooks update"
+    ],
+    "cghooks": "vendor/bin/cghooks",
+    "check-style": "vendor/bin/pint --test",
+    "fix-style": "vendor/bin/pint",
+    "test": "phpunit --colors",
+    "phpstan": "phpstan analyse",
+    "psalm": "psalm --show-info=true --no-cache",
+    "psalm-fix": "psalm --no-cache --alter --issues=MissingReturnType,MissingParamType"
+  },
+  "scripts-descriptions": {
+    "test": "Run all tests.",
+    "check-style": "Run style checks (only dry run - no fixing!).",
+    "fix-style": "Run style checks and fix violations."
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    }
+  }
 }
