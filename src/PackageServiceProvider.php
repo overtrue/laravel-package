@@ -22,8 +22,8 @@ class PackageServiceProvider extends ServiceProvider
 
     public function register()
     {
-//        $this->app->singleton(Package::class, function(){
-//            return new Package();
-//        });
+        //        $this->app->singleton(Package::class, function(){
+        //            return new Package();
+        //        });
     }
 }
