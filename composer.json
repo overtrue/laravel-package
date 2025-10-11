@@ -9,6 +9,7 @@
     }
   ],
   "require": {
+    "php": "^8.4",
     "laravel/framework": "^12.0",
     "phpstan/phpstan": "^2.0"
   },
@@ -28,7 +29,6 @@
     "orchestra/testbench": "^10.0",
     "vimeo/psalm": "^6.0",
     "jetbrains/phpstorm-attributes": "^1.0",
-    "brainmaestro/composer-git-hooks": "^3.0.0",
     "laravel/pint": "^1.24"
   },
   "extra": {
@@ -36,31 +36,10 @@
       "providers": [
         "\\Overtrue\\LaravelPackage\\PackageServiceProvider"
       ]
-    },
-    "hooks": {
-      "pre-commit": [
-        "composer check-style",
-        "composer phpstan",
-        "composer test"
-      ],
-      "pre-push": [
-        "composer check-style"
-      ]
     }
   },
   "scripts": {
-    "post-update-cmd": [
-      "cghooks remove",
-      "cghooks add --ignore-lock",
-      "cghooks update"
-    ],
     "post-merge": "composer install",
-    "post-install-cmd": [
-      "cghooks remove",
-      "cghooks add --ignore-lock",
-      "cghooks update"
-    ],
-    "cghooks": "vendor/bin/cghooks",
     "check-style": "vendor/bin/pint --test",
     "fix-style": "vendor/bin/pint",
     "test": "phpunit --colors",
