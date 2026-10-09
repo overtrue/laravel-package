@@ -23,10 +23,13 @@ Before installing dependencies:
 
 ```shell
 composer install
+composer fix-style
 composer test
 composer check-style
 composer test-smoke
 ```
+
+Run `composer fix-style` after renaming to update namespace import ordering.
 
 The smoke test requires network access and SQLite support. It creates a temporary, renamed package, installs it into a fresh Laravel 13 application through a Composer path repository, and checks automatic discovery, migration publishing and database behavior. Its sample migration is created only in the temporary package.
 
