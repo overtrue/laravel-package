@@ -6,32 +6,58 @@ on:
   pull_request:
     branches: [master]
 
+permissions:
+  contents: read
+
 jobs:
-  phpcs:
+  style:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup PHP environment
+      - uses: actions/checkout@v4
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.4
+          php-version: '8.4'
+          coverage: none
       - name: Install dependencies
-        run: composer install
-      - name: PHPCSFixer check
-        run: composer check-style
-  phpunit:
+        run: composer update --prefer-dist --prefer-stable --no-interaction
+      - run: composer validate --strict
+      - run: composer check-style
+
+  tests:
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        php_version: [8.4]
-    runs-on: ubuntu-latest
+        php: ['8.4', '8.5']
+        dependencies: [lowest, latest]
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup PHP environment
+      - uses: actions/checkout@v4
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php_version }}
-          coverage: xdebug
+          php-version: ${{ matrix.php }}
+          extensions: pdo_sqlite
+          coverage: none
       - name: Install dependencies
-        run: composer install
-      - name: PHPUnit check
-        run: ./vendor/bin/phpunit --coverage-text
+        run: composer update --prefer-dist --prefer-stable --no-interaction ${{ matrix.dependencies == 'lowest' && '--prefer-lowest' || '' }}
+      - run: composer audit
+      - run: composer check-platform-reqs
+      - run: composer test
+
+  smoke:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4', '8.5']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_sqlite
+          coverage: none
+      - name: Test a generated package in Laravel
+        run: composer test-smoke
