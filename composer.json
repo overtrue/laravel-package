@@ -10,8 +10,7 @@
   ],
   "require": {
     "php": "^8.4",
-    "laravel/framework": "^12.0",
-    "phpstan/phpstan": "^2.0"
+    "laravel/framework": "^13.30"
   },
   "autoload": {
     "psr-4": {
@@ -25,11 +24,12 @@
   },
   "require-dev": {
     "mockery/mockery": "^1.6",
-    "phpunit/phpunit": "^12.0",
-    "orchestra/testbench": "^10.0",
+    "phpunit/phpunit": "^12.5.22",
+    "orchestra/testbench": "^11.0",
     "vimeo/psalm": "^6.0",
     "jetbrains/phpstorm-attributes": "^1.0",
-    "laravel/pint": "^1.24"
+    "laravel/pint": "^1.24",
+    "phpstan/phpstan": "^2.0"
   },
   "extra": {
     "laravel": {
@@ -45,12 +45,14 @@
     "test": "phpunit --colors",
     "phpstan": "phpstan analyse",
     "psalm": "psalm --show-info=true --no-cache",
-    "psalm-fix": "psalm --no-cache --alter --issues=MissingReturnType,MissingParamType"
+    "psalm-fix": "psalm --no-cache --alter --issues=MissingReturnType,MissingParamType",
+    "test-smoke": "@php tests/smoke.php"
   },
   "scripts-descriptions": {
     "test": "Run all tests.",
     "check-style": "Run style checks (only dry run - no fixing!).",
-    "fix-style": "Run style checks and fix violations."
+    "fix-style": "Run style checks and fix violations.",
+    "test-smoke": "Test a renamed package in a fresh Laravel application."
   },
   "config": {
     "allow-plugins": {

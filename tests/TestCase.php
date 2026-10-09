@@ -2,17 +2,18 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Application;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Overtrue\LaravelPackage\PackageServiceProvider;
 
-abstract class TestCase extends \Orchestra\Testbench\TestCase
+abstract class TestCase extends Orchestra
 {
     /**
      * Load package service provider.
      *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array
+     * @param  Application  $app
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [PackageServiceProvider::class];
     }
@@ -20,11 +21,10 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
-        // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
             'driver' => 'sqlite',
@@ -33,10 +33,8 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         ]);
     }
 
-    protected function setUp(): void
+    protected function defineDatabaseMigrations(): void
     {
-        parent::setUp();
         $this->loadMigrationsFrom(__DIR__.'/migrations');
-        $this->loadMigrationsFrom(dirname(__DIR__).'/migrations');
     }
 }
